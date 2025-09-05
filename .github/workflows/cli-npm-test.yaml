@@ -1,17 +1,19 @@
-name: Build npm package for jstz CLI
+name: Build npm package for jstz CLI test
 
 on:
   push:
-    tags:
-      - "*"
 
 jobs:
   macos-arm64:
     name: Build CLI for MacOS Arm64
-    runs-on: macos
+    runs-on: macos-14
     outputs:
       artefact_name: ${{ steps.build.outputs.artefact_name }}
     steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
       - uses: jstz-dev/jstz/.github/actions/build-cli@main
         id: build
         with:
