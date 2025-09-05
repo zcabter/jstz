@@ -2,8 +2,6 @@ name: Build npm package for jstz CLI
 
 on:
   push:
-    tags:
-      - "*"
 
 jobs:
   macos-arm64:
